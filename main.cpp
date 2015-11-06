@@ -65,6 +65,7 @@ static ADS1115_config myconfig;
 int main(){
 	int err;
 	ADS1115_ADC_Val val = 0;
+	uint16_t configval = ADS1115_COMPARE_AIN0toGND | ADS1115_DATARATE_860_SPS | ADS1115_CONTINUOUS_CONVERSION | ADS1115_RANGEmV_FS6144 | ADS1115_COMP_QUE_DISABLE;
 
 	printf("here1\n");
 
@@ -74,7 +75,7 @@ int main(){
 
 	printf("here2\n");
 
-	if(err = ADS1115_writeReg(ADS1115_REG_CONFIGURATION, 0x4083, &myconfig, 0xffff)){
+	if(err = ADS1115_writeReg(ADS1115_REG_CONFIGURATION, configval , &myconfig, 0xffff)){
 		printf("err is %d\n", err);
 	}
 
