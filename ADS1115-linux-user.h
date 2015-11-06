@@ -61,15 +61,23 @@
 
 #define ADS1115_CONTINUOUS_CONVERSION (1<<8)
 
-#define ADS1115_DATARATE_008-SPS ((0b000)<<5)
-#define ADS1115_DATARATE_016-SPS ((0b001)<<5)
-#define ADS1115_DATARATE_032-SPS ((0b010)<<5)
-#define ADS1115_DATARATE_064-SPS ((0b011)<<5)
-#define ADS1115_DATARATE_128-SPS ((0b100)<<5)
-#define ADS1115_DATARATE_250-SPS ((0b101)<<5)
-#define ADS1115_DATARATE_475-SPS ((0b110)<<5)
-#define ADS1115_DATARATE_860-SPS ((0b111)<<5)
+#define ADS1115_DATARATE_008_SPS ((0b000)<<5)
+#define ADS1115_DATARATE_016_SPS ((0b001)<<5)
+#define ADS1115_DATARATE_032_SPS ((0b010)<<5)
+#define ADS1115_DATARATE_064_SPS ((0b011)<<5)
+#define ADS1115_DATARATE_128_SPS ((0b100)<<5)
+#define ADS1115_DATARATE_250_SPS ((0b101)<<5)
+#define ADS1115_DATARATE_475_SPS ((0b110)<<5)
+#define ADS1115_DATARATE_860_SPS ((0b111)<<5)
 
+typedef enum{
+	FS_6144 = 0,
+	FS_4096 = 1,
+	FS_2048 = 2,
+	FS_1024 = 3,
+	FS_0512 = 4,
+	FS_0256 = 5,
+} ADS1115_FS_range_t;
 
 
 #ifdef __cplusplus
@@ -100,6 +108,7 @@ int ADS1115_writeReg(uint8_t reg,
 		ADS1115_config* config,
 		uint16_t mask DEFAULT_PARAM(0xFFFF));
 int ADS1115_readConversionValue(ADS1115_config* config, ADS1115_ADC_Val* conversionValue);
+int ADS1115_readConversion_miliVolts(ADS1115_config* config, ADS1115_ADC_Val* miliVolts, ADS1115_FS_range_t FSrange);
 int ADS1115_close_i2c(ADS1115_config* config);
 
 

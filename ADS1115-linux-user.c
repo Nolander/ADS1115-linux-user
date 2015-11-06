@@ -18,7 +18,7 @@ static int __read_reg(uint8_t reg, uint16_t* userbuf, ADS1115_config* config);
 static int __write_reg(uint8_t reg, uint16_t val, ADS1115_config* config);
 
 static char buf[4];
-
+static int FS_ranges_mV[6] = {6144, 4094, 2048, 1024, 512, 256};
 
 int ADS1115_init(ADS1115_config* config, int i2c_file, uint8_t dev_address){
 	int err = 0;
@@ -111,6 +111,21 @@ int ADS1115_readConversionValue(ADS1115_config* config, ADS1115_ADC_Val* convers
 
 	return __read_reg(ADS1115_REG_CONVERSION, (uint16_t*)conversionValue, config);
 
+}
+
+int ADS1115_readConversion_miliVolts(ADS1115_config* config, ADS1115_ADC_Val* miliVolts, ADS1115_FS_range_t FSrange){
+
+	VERIFY(config);
+	int err;
+	ADS1115_ADC_Val val;
+
+	if( err = __read_reg(ADS1115_REG_CONVERSION, (uint16_t*)&val, config)){
+		return err;
+	}
+
+	*miliVolts = (ADS1115_ADC_Val)((FS_ranges_mV[FSrange]*(int)val) >> 15);
+
+	return err;
 }
 
 int ADS1115_close_i2c(ADS1115_config* config){

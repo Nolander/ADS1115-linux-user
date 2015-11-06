@@ -87,7 +87,7 @@ int main(){
 	printf("here3\n");
 
 	while(1){
-		if(err =  ADS1115_readConversionValue(&myconfig, &val)){
+		if(err =  ADS1115_readConversion_miliVolts(&myconfig, &val, FS_6144)){
 			printf("err is %d\n", err);
 		}
 
