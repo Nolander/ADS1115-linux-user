@@ -9,11 +9,11 @@ static ADS1115_config myconfig;
 int main(){
 	int err;
 	ADS1115_ADC_Val val = 0;
-	uint16_t configval = ADS1115_COMPARE_AIN0toGND | ADS1115_DATARATE_860_SPS | ADS1115_CONTINUOUS_CONVERSION | ADS1115_RANGEmV_FS6144 | ADS1115_COMP_QUE_DISABLE;
+	uint16_t configval = ADS1115_COMPARE_AIN3toGND | ADS1115_DATARATE_128_SPS | ADS1115_CONTINUOUS_CONVERSION | ADS1115_RANGEmV_FS6144 | ADS1115_COMP_QUE_DISABLE;
 
 	printf("here1\n");
 
-	if(err =  ADS1115_init_and_open_i2c(&myconfig, 1, 0x90)){
+	if(err =  ADS1115_init_and_open_i2c(&myconfig, 2, 0x90)){
 		printf("err is %d\n", err);
 	}
 
@@ -37,5 +37,6 @@ int main(){
 		}
 
 		printf("it reads %d milivolts \n", val);
+
 	}
 }

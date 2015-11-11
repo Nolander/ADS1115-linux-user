@@ -155,7 +155,7 @@ static int __write_reg(uint8_t reg,
 	buf[2] = (char)val;
 
 	if (write(config->i2c_file, buf, 3) != 3) {
-		perror("pca9555SetRegister");
+		perror("ads1115SetRegister");
 		return ADS1115_ERR_I2C_WRITE;
 	}
 
